@@ -1,0 +1,17 @@
+// Package corti.events.v1 defines Corti events. Each message is a
+// CloudEvents proto_data payload: events travel on NATS wrapped in the
+// CloudEvent proto envelope io.cloudevents.v1.CloudEvent with proto_data set
+// to the message.
+syntax = "proto3";
+
+package corti.events.v1;
+
+option go_package = "github.com/corticph/gocomo/eventbus/prototype/events/v1;eventsv1";
+
+// BookmarkAdded is published when a clinician bookmarks an encounter.
+message BookmarkAdded {
+  // bookmark_id is the identifier of the added bookmark.
+  string bookmark_id = 1;
+  // encounter_id is the encounter the bookmark was added to.
+  string encounter_id = 2;
+}
