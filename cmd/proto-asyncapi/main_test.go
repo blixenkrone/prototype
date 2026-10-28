@@ -16,6 +16,7 @@ func TestRenderProducesDeterministicAsyncAPI(t *testing.T) {
 	descriptors, err := proto.Marshal(&descriptorpb.FileDescriptorSet{
 		File: []*descriptorpb.FileDescriptorProto{
 			protodesc.ToFileDescriptorProto(eventsv1.File_events_v1_events_proto),
+			protodesc.ToFileDescriptorProto(eventsv1.File_events_v1_events_1_proto),
 		},
 	})
 	if err != nil {
@@ -26,7 +27,7 @@ func TestRenderProducesDeterministicAsyncAPI(t *testing.T) {
 		t.Fatalf("could not unmarshal event descriptor: %v", err)
 	}
 
-	cloudEventProto, err := os.ReadFile("../../proto/third_party/cloudevents/v1/spec.proto")
+	cloudEventProto, err := os.ReadFile("../../events/proto/third_party/cloudevents/v1/spec.proto")
 	if err != nil {
 		t.Fatalf("could not read vendored CloudEvents proto: %v", err)
 	}

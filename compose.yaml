@@ -1,0 +1,54 @@
+services:
+  nats:
+    image: nats:2.11-alpine
+    command: ["-js", "-sd", "/data", "-m", "8222"]
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    volumes:
+      - nats-data:/data
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://127.0.0.1:8222/healthz"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+      start_period: 2s
+
+  consumer:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+      args:
+        SERVICE: demo-consumer
+    environment:
+      NATS_URL: nats://nats:4222
+    depends_on:
+      nats:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://127.0.0.1:8080/healthz"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+      start_period: 2s
+    stop_grace_period: 10s
+
+  producer:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+      args:
+        SERVICE: demo-producer
+    environment:
+      NATS_URL: nats://nats:4222
+      EVENT_SOURCE: urn:corti:demo:producer
+      BOOKMARK_ID: demo-bookmark-1
+      ENCOUNTER_ID: demo-encounter-1
+    depends_on:
+      nats:
+        condition: service_healthy
+      consumer:
+        condition: service_healthy
+
+volumes:
+  nats-data:

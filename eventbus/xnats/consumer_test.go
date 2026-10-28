@@ -15,8 +15,8 @@ import (
 	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	"github.com/corticph/gocomo/eventbus/prototype/eventbus"
+	"github.com/corticph/gocomo/eventbus/prototype/eventbus/xnats"
 	events "github.com/corticph/gocomo/eventbus/prototype/events/v1"
-	"github.com/corticph/gocomo/eventbus/prototype/xnats"
 )
 
 var errTransient = errors.New("transient failure")

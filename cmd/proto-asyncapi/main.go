@@ -18,7 +18,7 @@ const (
 
 func main() {
 	descriptorPath := flag.String("descriptor", "descriptor.bin", "Buf FileDescriptorSet path")
-	cloudEventPath := flag.String("cloud-event-proto", "proto/third_party/cloudevents/v1/spec.proto", "CloudEvents spec.proto path")
+	cloudEventPath := flag.String("cloud-event-proto", "events/proto/third_party/cloudevents/v1/spec.proto", "CloudEvents spec.proto path")
 	outputPath := flag.String("output", "docs/asyncapi.yaml", "output AsyncAPI document path")
 	flag.Parse()
 

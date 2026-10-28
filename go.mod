@@ -3,11 +3,14 @@ module github.com/corticph/gocomo/eventbus/prototype
 go 1.27.3
 
 require (
+	github.com/corticph/gocomo/eventbus/prototype/events v0.0.0
 	github.com/google/uuid v1.6.0
 	github.com/nats-io/nats-server/v2 v2.15.2
 	github.com/nats-io/nats.go v1.55.0
 	google.golang.org/protobuf v1.36.12
 )
+
+replace github.com/corticph/gocomo/eventbus/prototype/events => ./events
 
 require (
 	github.com/antithesishq/antithesis-sdk-go v0.8.0-default-no-op // indirect

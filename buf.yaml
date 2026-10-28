@@ -1,6 +1,9 @@
+# From this directory, `buf build -o descriptor.bin` writes the FileDescriptorSet
+# consumed by `go run ./cmd/proto-asyncapi` (defaults: descriptor.bin,
+# events/proto/third_party/cloudevents/v1/spec.proto, and docs/asyncapi.yaml).
 version: v2
 modules:
-  - path: proto
+  - path: events/proto
 lint:
   use:
     - STANDARD
