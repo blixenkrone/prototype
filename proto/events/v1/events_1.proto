@@ -1,0 +1,13 @@
+// Package corti.events.v1 defines Corti events. Each message is a
+// CloudEvents proto_data payload: events travel on NATS wrapped in the
+// CloudEvent proto envelope io.cloudevents.v1.CloudEvent with proto_data set
+// to the message.
+syntax = "proto3";
+
+package corti.events.v1;
+
+option go_package = "github.com/corticph/gocomo/eventbus/prototype/events/v1;eventsv1";
+
+message MyMsg {
+  string test = 1;
+}
