@@ -15,3 +15,9 @@ message BookmarkAdded {
   // encounter_id is the encounter the bookmark was added to.
   string encounter_id = 2;
 }
+message MessageDelivered {
+  // bookmark_id is the identifier of the added bookmark.
+  string bookmark_id = 1;
+  // encounter_id is the encounter the bookmark was added to.
+  string encounter_id = 2;
+}
