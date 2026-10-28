@@ -81,12 +81,70 @@ func (x *BookmarkAdded) GetEncounterId() string {
 	return ""
 }
 
+type MessageDelivered struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// bookmark_id is the identifier of the added bookmark.
+	BookmarkId string `protobuf:"bytes,1,opt,name=bookmark_id,json=bookmarkId,proto3" json:"bookmark_id,omitempty"`
+	// encounter_id is the encounter the bookmark was added to.
+	EncounterId   string `protobuf:"bytes,2,opt,name=encounter_id,json=encounterId,proto3" json:"encounter_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MessageDelivered) Reset() {
+	*x = MessageDelivered{}
+	mi := &file_events_v1_events_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MessageDelivered) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MessageDelivered) ProtoMessage() {}
+
+func (x *MessageDelivered) ProtoReflect() protoreflect.Message {
+	mi := &file_events_v1_events_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MessageDelivered.ProtoReflect.Descriptor instead.
+func (*MessageDelivered) Descriptor() ([]byte, []int) {
+	return file_events_v1_events_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *MessageDelivered) GetBookmarkId() string {
+	if x != nil {
+		return x.BookmarkId
+	}
+	return ""
+}
+
+func (x *MessageDelivered) GetEncounterId() string {
+	if x != nil {
+		return x.EncounterId
+	}
+	return ""
+}
+
 var File_events_v1_events_proto protoreflect.FileDescriptor
 
 const file_events_v1_events_proto_rawDesc = "" +
 	"\n" +
 	"\x16events/v1/events.proto\x12\x0fcorti.events.v1\"S\n" +
 	"\rBookmarkAdded\x12\x1f\n" +
+	"\vbookmark_id\x18\x01 \x01(\tR\n" +
+	"bookmarkId\x12!\n" +
+	"\fencounter_id\x18\x02 \x01(\tR\vencounterId\"V\n" +
+	"\x10MessageDelivered\x12\x1f\n" +
 	"\vbookmark_id\x18\x01 \x01(\tR\n" +
 	"bookmarkId\x12!\n" +
 	"\fencounter_id\x18\x02 \x01(\tR\vencounterIdBBZ@github.com/corticph/gocomo/eventbus/prototype/events/v1;eventsv1b\x06proto3"
@@ -103,9 +161,10 @@ func file_events_v1_events_proto_rawDescGZIP() []byte {
 	return file_events_v1_events_proto_rawDescData
 }
 
-var file_events_v1_events_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_events_v1_events_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_events_v1_events_proto_goTypes = []any{
-	(*BookmarkAdded)(nil), // 0: corti.events.v1.BookmarkAdded
+	(*BookmarkAdded)(nil),    // 0: corti.events.v1.BookmarkAdded
+	(*MessageDelivered)(nil), // 1: corti.events.v1.MessageDelivered
 }
 var file_events_v1_events_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -126,7 +185,7 @@ func file_events_v1_events_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_events_v1_events_proto_rawDesc), len(file_events_v1_events_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

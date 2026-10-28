@@ -80,8 +80,169 @@ channels:
               string bookmark_id = 1;
               string encounter_id = 2;
             }
+  corti_events_v1_messagedelivered:
+    address: corti.events.v1.messagedelivered
+    messages:
+      MessageDelivered:
+        name: corti.events.v1.MessageDelivered
+        title: MessageDelivered
+        contentType: application/protobuf
+        payload:
+          schemaFormat: application/vnd.google.protobuf;version=3
+          schema: |
+            /**
+             * CloudEvent Protobuf Format
+             *
+             * - Required context attributes are explicity represented.
+             * - Optional and Extension context attributes are carried in a map structure.
+             * - Data may be represented as binary, text, or protobuf messages.
+             */
+
+            syntax = "proto3";
+
+            package io.cloudevents.v1;
+
+            import "google/protobuf/any.proto";
+            import "google/protobuf/timestamp.proto";
+
+            option go_package = "cloudevents.io/genproto/v1";
+            option java_package = "io.cloudevents.v1.proto";
+            option java_multiple_files = true;
+            option php_namespace = "Io\\CloudEvents\\V1\\Proto";
+            option ruby_package = "Io::CloudEvents::V1::Proto";
+
+            message CloudEvent {
+
+              // -- CloudEvent Context Attributes
+
+              // Required Attributes
+              string id = 1;
+              string source = 2; // URI-reference
+              string spec_version = 3;
+              string type = 4;
+
+              // Optional & Extension Attributes
+              map<string, CloudEventAttributeValue> attributes = 5;
+
+              // -- CloudEvent Data (Bytes, Text, or Proto)
+              oneof  data {
+                bytes binary_data = 6;
+                string text_data = 7;
+                google.protobuf.Any proto_data = 8;
+              }
+
+              /**
+               * The CloudEvent specification defines
+               * seven attribute value types...
+               */
+
+              message CloudEventAttributeValue {
+
+                oneof attr {
+                  bool ce_boolean = 1;
+                  int32 ce_integer = 2;
+                  string ce_string = 3;
+                  bytes ce_bytes = 4;
+                  string ce_uri = 5;
+                  string ce_uri_ref = 6;
+                  google.protobuf.Timestamp ce_timestamp = 7;
+                }
+              }
+            }
+        x-protobuf-data-type: corti.events.v1.MessageDelivered
+        x-protobuf-data-schema:
+          schemaFormat: application/vnd.google.protobuf;version=3
+          schema: |
+            message MessageDelivered {
+              string bookmark_id = 1;
+              string encounter_id = 2;
+            }
+  corti_events_v1_mymsg:
+    address: corti.events.v1.mymsg
+    messages:
+      MyMsg:
+        name: corti.events.v1.MyMsg
+        title: MyMsg
+        contentType: application/protobuf
+        payload:
+          schemaFormat: application/vnd.google.protobuf;version=3
+          schema: |
+            /**
+             * CloudEvent Protobuf Format
+             *
+             * - Required context attributes are explicity represented.
+             * - Optional and Extension context attributes are carried in a map structure.
+             * - Data may be represented as binary, text, or protobuf messages.
+             */
+
+            syntax = "proto3";
+
+            package io.cloudevents.v1;
+
+            import "google/protobuf/any.proto";
+            import "google/protobuf/timestamp.proto";
+
+            option go_package = "cloudevents.io/genproto/v1";
+            option java_package = "io.cloudevents.v1.proto";
+            option java_multiple_files = true;
+            option php_namespace = "Io\\CloudEvents\\V1\\Proto";
+            option ruby_package = "Io::CloudEvents::V1::Proto";
+
+            message CloudEvent {
+
+              // -- CloudEvent Context Attributes
+
+              // Required Attributes
+              string id = 1;
+              string source = 2; // URI-reference
+              string spec_version = 3;
+              string type = 4;
+
+              // Optional & Extension Attributes
+              map<string, CloudEventAttributeValue> attributes = 5;
+
+              // -- CloudEvent Data (Bytes, Text, or Proto)
+              oneof  data {
+                bytes binary_data = 6;
+                string text_data = 7;
+                google.protobuf.Any proto_data = 8;
+              }
+
+              /**
+               * The CloudEvent specification defines
+               * seven attribute value types...
+               */
+
+              message CloudEventAttributeValue {
+
+                oneof attr {
+                  bool ce_boolean = 1;
+                  int32 ce_integer = 2;
+                  string ce_string = 3;
+                  bytes ce_bytes = 4;
+                  string ce_uri = 5;
+                  string ce_uri_ref = 6;
+                  google.protobuf.Timestamp ce_timestamp = 7;
+                }
+              }
+            }
+        x-protobuf-data-type: corti.events.v1.MyMsg
+        x-protobuf-data-schema:
+          schemaFormat: application/vnd.google.protobuf;version=3
+          schema: |
+            message MyMsg {
+              string test = 1;
+            }
 operations:
   publish_corti_events_v1_bookmarkadded:
     action: send
     channel:
       $ref: '#/channels/corti_events_v1_bookmarkadded'
+  publish_corti_events_v1_messagedelivered:
+    action: send
+    channel:
+      $ref: '#/channels/corti_events_v1_messagedelivered'
+  publish_corti_events_v1_mymsg:
+    action: send
+    channel:
+      $ref: '#/channels/corti_events_v1_mymsg'
